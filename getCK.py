@@ -1,10 +1,9 @@
 # coding:utf-8
 import socket
-import re
 import requests
 import json
 import time
-import datetime
+import random
 import logging
 requests.packages.urllib3.disable_warnings()
 
@@ -25,7 +24,15 @@ while True:
         request = client_connection.recv(1024)
         reqDec = request.decode("utf-8")
 
-        jd_ua = 'jdltapp;iPhone;3.1.0;14.4;;network/wifi;hasUPPay/0;pushNoticeIsOpen/0;lang/zh_CN;model/iPhone11,6;hasOCPay/0;appBuild/1017;supportBestPay/0;addressid/2813715704;pv/67.38;apprpd/MyJD_Main;ref/https%3A%2F%2Fh5.m.jd.com%2FbabelDiy%2FZeus%2F2ynE8QDtc2svd36VowmYWBzzDdK6%2Findex.html%3Flng%3D103.957532%26lat%3D30.626962%26sid%3D4fe8ef4283b24723a7bb30ee87c18b2w%26un_area%3D22_1930_49324_52512;psq/4;ads/;psn/5aef178f95931bdbbde849ea9e2fc62b18bc5829|127;jdv/0|direct|-|none|-|1612588090667|1613822580;adk/;app_device/IOS;pap/JA2020_3112531|3.1.0|IOS 14.4;Mozilla/5.0 (iPhone; CPU iPhone OS 14_4 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Mobile/15E148;supportJDSHWK/1'
+        random_str = ''
+        base_str = '0123456789'
+        length = len(base_str) - 1
+        for i in range(40):
+            random_str += base_str[random.randint(0, length)]
+
+        jd_ua = 'jdapp;android;10.0.2;9;'+random_str+';network/wifi;model/MI 8;addressid/138087843;aid/0a4fc8ec9548a7f9;oaid/3ac46dd4d42fa41c;osVer/28;appBuild/${UANumber};partner/jingdong;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 9; MI 8 Build/PKQ1.180729.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045715 Mobile Safari/537.36'
+
+        print("生成ua为:" + jd_ua)
 
         session = requests.session()
 

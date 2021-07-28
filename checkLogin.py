@@ -5,6 +5,7 @@ import requests
 import json
 import time
 import datetime
+import random
 from requests.cookies import RequestsCookieJar
 import urllib3
 
@@ -17,7 +18,14 @@ listen_socket.bind((HOST, PORT))
 listen_socket.listen(1)
 print('Serving HTTP on port %s ...' % PORT)
 
-jd_ua = 'jdapp;android;10.0.5;11;0393465333165363-5333430323261366;network/wifi;model/M2102K1C;osVer/30;appBuild/88681;partner/lc001;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 11; M2102K1C Build/RKQ1.201112.002; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045534 Mobile Safari/537.36'
+random_str = ''
+base_str = '0123456789'
+length = len(base_str) - 1
+for i in range(40):
+    random_str += base_str[random.randint(0, length)]
+
+jd_ua = 'jdapp;android;10.0.2;9;'+random_str+';network/wifi;model/MI 8;addressid/138087843;aid/0a4fc8ec9548a7f9;oaid/3ac46dd4d42fa41c;osVer/28;appBuild/${UANumber};partner/jingdong;eufv/1;jdSupportDarkMode/0;Mozilla/5.0 (Linux; Android 9; MI 8 Build/PKQ1.180729.001; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/77.0.3865.120 MQQBrowser/6.2 TBS/045715 Mobile Safari/537.36'
+print("生成ua为:" + jd_ua)
 
 while True:
 
